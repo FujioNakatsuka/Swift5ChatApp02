@@ -11,6 +11,7 @@ import ChameleonFramework
 import Firebase
 
 class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSource,UITextFieldDelegate {
+    
   
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var messageTextField: UITextField!
@@ -20,9 +21,6 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let screenSize = UIScreen.main.bounds.size
     
     var chatArray = [Message]()
-    
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,6 +39,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         NotificationCenter.default.addObserver(self, selector:  #selector(ChatViewController.keyboardWillShow(_ :)), name: UIResponder.keyboardWillShowNotification, object: nil)
         
         
+        
         NotificationCenter.default.addObserver(self, selector:  #selector(ChatViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
         //Firebaseからデータをfetchする（取得）
@@ -51,69 +50,97 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-   @objc func keyboardWillShow(_ notification:NSNotification){
+   
+    @objc func keyboardWillShow(_ notification:NSNotification){
         
     let keyboardHeight = ((notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey]as Any) as AnyObject).cgRectValue.height
     
     messageTextField.frame.origin.y = screenSize.height-keyboardHeight-messageTextField.frame.height
+//    sendButton.frame.origin.y = screenSize.height - keyboardHeight - sendButton.frame.height
     
+        
+        
+        
     }
+    
     @objc func keyboardWillHide(_ notification:NSNotification){
         
         messageTextField.frame.origin.y = screenSize.height - messageTextField.frame.height
-   
+//   sendButton.frame.origin.y = screenSize.height - sendButton.frame.height
 //⭐️guard [,]で繋げるのか？
-        
-        //guard let rect = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue
-//
-//        let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey]as? TimeInterval else{return}
-        
+
         guard let rect = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else{return}
       
+        
+        
         UIView.animate(withDuration: duration){
             
             let transform = CGAffineTransform(translationX: 0, y:0)
             self.view.transform = transform
             
         }
-    
-        func touchesBegan(_ toouches: Set<UITouch>, with event: UIEvent){
+  
+    }
+        
+    override func touchesBegan(_ toouches: Set<UITouch>, with event: UIEvent?){
+            
             messageTextField.resignFirstResponder()
                   
         }
         
         func textFieldShouldReturn(_ textField: UITextField) -> Bool{
+            
             textField.resignFirstResponder()
+            
             return true
-        }
+        
+    }
         
         
-        func numberOfSections(in tableview: UITableView) -> Int {
+    
+
+
+    func numberOfSections(in tableview: UITableView) -> Int {
             
             return 1
             
-        }
+   }
  
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       //メッセージの数
+   
+        //メッセージの数
         return chatArray.count
-        }
-      
-      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+  
+    
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
+        
         cell.messageLabel.text = chatArray[indexPath.row].message
+        
+        
+        
+        
+        
         cell.userNameLabel.text = chatArray[indexPath.row].sender
         cell.iconImageView.image = UIImage(named: "dogAvatarImage")
         
         if cell.userNameLabel.text == Auth.auth().currentUser?.email as! String{
             
             cell.messageLabel.backgroundColor = UIColor.flatGreen()
-            
+            cell.messageLabel.layer.cornerRadius = 20
+            cell.messageLabel.layer.masksToBounds = true
+        
         }else{
             
             cell.messageLabel.backgroundColor = UIColor.flatBlue()
+            cell.messageLabel.layer.cornerRadius = 20
+            cell.messageLabel.layer.masksToBounds = true
+            
         }
         
         
@@ -124,13 +151,10 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
       }
 
-}
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-          <#code#>
-      }
-      
-      func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-          <#code#>
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+          
+          return 100
+          
       }
 
 
@@ -139,19 +163,44 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         messageTextField.isEnabled = false
         sendButton.isEnabled = false
         
+        
+        
+        if messageTextField.text!.count > 15{
+                       
+                   print("15文字以上になりました。")
+                   
+                   return
+     
+            
+    }
+    
+        
         let chatDB = Database.database().reference().child("chats")
         
         //キーバリュー型で内容を送信（Dictionary型）
         let messageInfo = ["sender":Auth.auth().currentUser?.email,"message":messageTextField.text!]
         
         //chatDBに入れる
-        
-        
-        
-        
-        
-
-            }
+        chatDB.childByAutoId().setValue(messageInfo) { (error, result) in
+             
+             if error != nil{
+                 print(error)
+                 
+             }else{
+                 
+                 print("送信完了！！")
+                 self.messageTextField.isEnabled = true
+                 self.sendButton.isEnabled = true
+                 self.messageTextField.text = ""
+                 
+                 
+                 
+             }
+             
+             
+         }
+  
+ }
                     //データを引っ張ってくる
                     func fetchChatData(){
             //⭐️FireBaseの書き方か？「どこからデータを引っ張ってくるのか」

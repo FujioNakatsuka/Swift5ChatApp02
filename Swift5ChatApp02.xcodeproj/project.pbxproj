@@ -20,6 +20,8 @@
 		8D67B76324DAB28B0016FB1E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D67B76124DAB28B0016FB1E /* CustomCell.swift */; };
 		8D67B76424DAB28B0016FB1E /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D67B76224DAB28B0016FB1E /* CustomCell.xib */; };
 		8DE86C2B24DAE6D800EF448D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE86C2A24DAE6D800EF448D /* Message.swift */; };
+		8DE86C2D24DAFF0D00EF448D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 8DE86C2C24DAFF0D00EF448D /* GoogleService-Info.plist */; };
+		8DE86C2F24DB06D400EF448D /* loading.json in Resources */ = {isa = PBXBuildFile; fileRef = 8DE86C2E24DB06D400EF448D /* loading.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +42,8 @@
 		8D67B76124DAB28B0016FB1E /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		8D67B76224DAB28B0016FB1E /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
 		8DE86C2A24DAE6D800EF448D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		8DE86C2C24DAFF0D00EF448D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		8DE86C2E24DB06D400EF448D /* loading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = loading.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -80,6 +84,7 @@
 				8D39837024DA8C0B002DADCC /* Controller */,
 				8D39836524DA5733002DADCC /* LaunchScreen.storyboard */,
 				8D39836824DA5733002DADCC /* Info.plist */,
+				8DE86C2C24DAFF0D00EF448D /* GoogleService-Info.plist */,
 			);
 			path = Swift5ChatApp02;
 			sourceTree = "<group>";
@@ -110,6 +115,7 @@
 				8D39835C24DA5731002DADCC /* SceneDelegate.swift */,
 				8D39835E24DA5731002DADCC /* ViewController.swift */,
 				8D39837124DA9396002DADCC /* RegisterViewController.swift */,
+				8DE86C2E24DB06D400EF448D /* loading.json */,
 				8D67B75D24DA9E410016FB1E /* ChatViewController.swift */,
 				8D67B75F24DAA06A0016FB1E /* LoginViewController.swift */,
 			);
@@ -195,6 +201,8 @@
 			files = (
 				8D39836724DA5733002DADCC /* LaunchScreen.storyboard in Resources */,
 				8D39836424DA5733002DADCC /* Assets.xcassets in Resources */,
+				8DE86C2F24DB06D400EF448D /* loading.json in Resources */,
+				8DE86C2D24DAFF0D00EF448D /* GoogleService-Info.plist in Resources */,
 				8D67B76424DAB28B0016FB1E /* CustomCell.xib in Resources */,
 				8D39836224DA5731002DADCC /* Main.storyboard in Resources */,
 			);
