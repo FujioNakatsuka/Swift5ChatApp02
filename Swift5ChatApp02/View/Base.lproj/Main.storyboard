@@ -162,30 +162,33 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v6F-Ok-Gmb">
-                                <rect key="frame" x="0.0" y="88" width="432" height="677"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="677"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="95" id="ihf-f4-Ryg" customClass="CustomCell" customModule="Swift5ChatApp02" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="432" height="95"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="70" id="ihf-f4-Ryg" customClass="CustomCell" customModule="Swift5ChatApp02" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="70"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ihf-f4-Ryg" id="Gje-Ez-OL5">
-                                            <rect key="frame" x="0.0" y="0.0" width="432" height="95"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="70"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
                             <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="9ld-cb-uab">
-                                <rect key="frame" x="20" y="828" width="315" height="34"/>
+                                <rect key="frame" x="20" y="862" width="315" height="34"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WiM-tc-hoy">
-                                <rect key="frame" x="349" y="828" width="34" height="30"/>
+                                <rect key="frame" x="343" y="862" width="34" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="send"/>
+                                <connections>
+                                    <action selector="sendAction:" destination="EwS-5M-xiL" eventType="touchUpInside" id="V0I-f5-J5k"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
@@ -194,12 +197,13 @@
                     <navigationItem key="navigationItem" id="cxp-ux-RYi"/>
                     <connections>
                         <outlet property="messageTextField" destination="9ld-cb-uab" id="MVt-6k-6PZ"/>
+                        <outlet property="sendButton" destination="WiM-tc-hoy" id="M2f-a4-378"/>
                         <outlet property="tableView" destination="v6F-Ok-Gmb" id="coO-cG-ixV"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZdZ-lH-3rG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1847.826086956522" y="223.66071428571428"/>
+            <point key="canvasLocation" x="1953.6231884057972" y="222.99107142857142"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="PfH-nH-kAe">

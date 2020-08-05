@@ -19,6 +19,7 @@
 		8D67B76024DAA06A0016FB1E /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D67B75F24DAA06A0016FB1E /* LoginViewController.swift */; };
 		8D67B76324DAB28B0016FB1E /* CustomCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D67B76124DAB28B0016FB1E /* CustomCell.swift */; };
 		8D67B76424DAB28B0016FB1E /* CustomCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8D67B76224DAB28B0016FB1E /* CustomCell.xib */; };
+		8DE86C2B24DAE6D800EF448D /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8DE86C2A24DAE6D800EF448D /* Message.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		8D67B75F24DAA06A0016FB1E /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8D67B76124DAB28B0016FB1E /* CustomCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomCell.swift; sourceTree = "<group>"; };
 		8D67B76224DAB28B0016FB1E /* CustomCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CustomCell.xib; sourceTree = "<group>"; };
+		8DE86C2A24DAE6D800EF448D /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +87,7 @@
 		8D39836E24DA8BED002DADCC /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8DE86C2A24DAE6D800EF448D /* Message.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -251,6 +254,7 @@
 				8D39835B24DA5731002DADCC /* AppDelegate.swift in Sources */,
 				8D39835D24DA5731002DADCC /* SceneDelegate.swift in Sources */,
 				8D67B75E24DA9E410016FB1E /* ChatViewController.swift in Sources */,
+				8DE86C2B24DAE6D800EF448D /* Message.swift in Sources */,
 				8D67B76324DAB28B0016FB1E /* CustomCell.swift in Sources */,
 				8D39837224DA9396002DADCC /* RegisterViewController.swift in Sources */,
 			);
