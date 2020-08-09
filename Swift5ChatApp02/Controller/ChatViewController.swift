@@ -42,7 +42,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         NotificationCenter.default.addObserver(self, selector:  #selector(ChatViewController.keyboardWillHide(_ :)), name: UIResponder.keyboardWillHideNotification, object: nil)
         
-        //Firebaseからデータをfetchする（取得）
+        //Viewが出た時にFirebaseからデータをfetchする（取得）
         fetchChatData()
         
         tableView.separatorStyle = .none
@@ -50,15 +50,14 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
     
-   
+   //引数としてNSNotificationを取れる。メソッド復習✨
+    //🌷messageTextField.becomeFirstResponder()はなぜ必要がないのか？
     @objc func keyboardWillShow(_ notification:NSNotification){
         
     let keyboardHeight = ((notification.userInfo![UIResponder.keyboardFrameEndUserInfoKey]as Any) as AnyObject).cgRectValue.height
     
     messageTextField.frame.origin.y = screenSize.height-keyboardHeight-messageTextField.frame.height
-//    sendButton.frame.origin.y = screenSize.height - keyboardHeight - sendButton.frame.height
-    
-        
+
         
         
     }
@@ -66,14 +65,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     @objc func keyboardWillHide(_ notification:NSNotification){
         
         messageTextField.frame.origin.y = screenSize.height - messageTextField.frame.height
-//   sendButton.frame.origin.y = screenSize.height - sendButton.frame.height
-//⭐️guard [,]で繋げるのか？
+
+//🌷guard[,]はなぜ打つのかguradからCGreactValue/Timeintervalが並列で繋がっていて、それぞれの値を取得しに行っている？
 
         guard let rect = (notification.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue,
         let duration = notification.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? TimeInterval else{return}
       
-        
-        
         UIView.animate(withDuration: duration){
             
             let transform = CGAffineTransform(translationX: 0, y:0)
@@ -82,13 +79,13 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
   
     }
-        
+    //🌷UITouchをした時にイベントを発生する関数をfunc touchesBeganと設定して、resignFirstResponderという動作を起こす
     override func touchesBegan(_ toouches: Set<UITouch>, with event: UIEvent?){
             
             messageTextField.resignFirstResponder()
                   
         }
-        
+        //🌷textFieldShouldReturnはreturnキーが押された時に呼ばれるメソッドでブール値で動作をするかしないかが決まる。
         func textFieldShouldReturn(_ textField: UITextField) -> Bool{
             
             textField.resignFirstResponder()
@@ -97,17 +94,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
     }
         
-        
-    
-
-
-    func numberOfSections(in tableview: UITableView) -> Int {
-            
-            return 1
-            
-   }
- 
-    
+   
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
    
         //メッセージの数
@@ -115,21 +102,27 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
   
     
     }
+  
+    func numberOfSections(in tableview: UITableView) -> Int {
+              
+              return 1
+              
+     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath) as! CustomCell
         
         cell.messageLabel.text = chatArray[indexPath.row].message
+        if (cell.messageLabel.text != nil) {print("OK")}
+    
         
         
-        
-        
-        
+  
         cell.userNameLabel.text = chatArray[indexPath.row].sender
         cell.iconImageView.image = UIImage(named: "dogAvatarImage")
         
-        if cell.userNameLabel.text == Auth.auth().currentUser?.email as! String{
+        if cell.userNameLabel.text == Auth.auth().currentUser!.email as! String{
             
             cell.messageLabel.backgroundColor = UIColor.flatGreen()
             cell.messageLabel.layer.cornerRadius = 20
@@ -184,7 +177,7 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         chatDB.childByAutoId().setValue(messageInfo) { (error, result) in
              
              if error != nil{
-                 print(error)
+                print(error!)
                  
              }else{
                  
@@ -203,12 +196,12 @@ class ChatViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
  }
                     //データを引っ張ってくる
                     func fetchChatData(){
-            //⭐️FireBaseの書き方か？「どこからデータを引っ張ってくるのか」
+            //🌷FireBaseの書き方か？「どこからデータを引っ張ってくるのか」
                         let fetchDataRef = Database.database().reference().child("chats")
                         
                         //新しく更新があった時だけ取得したい。新しいデータはsnapShotに入ってくる
                         fetchDataRef.observe(.childAdded){(snapShot) in
-                            let snapShotData = snapShot.value as! AnyObject
+                            let snapShotData = snapShot.value as AnyObject
                             let text = snapShotData.value(forKey: "message")
                             let sender = snapShotData.value(forKey: "sender")
                             
